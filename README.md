@@ -10,6 +10,7 @@ My simple NodeJS + React app to increase my skills - add/delete some mesages (ta
 <ul>
   <li>Clone or download repo</li>
   <li>cd /taskrunner</li>
-  <li>npm install</li>
+  <li>run $npm install</li>
+  <li>run $nodemon</li>
   <li>Open your browser with url http://localhost:8888</li>
 </ul>
