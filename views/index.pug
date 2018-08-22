@@ -1,0 +1,22 @@
+extends layout
+
+block cont
+  div.container
+    h1="Welcome Here!"
+    p="You are on Task Runner app!"
+  div.container
+    div#root
+  div.container
+    each val, index in title
+      div.task-wrapper
+        h5=val
+        p=text[index]
+        if id[index] != 0
+          a(href="/del/"+id[index])  Delete
+  div.container
+    form(method="post" action="/")#taskForm
+      input(type="text" placeholder="Put some title here!" name="title")
+      br
+      textarea(placeholder="Put some text here here!" name="text")
+      br
+      button(type="submit")="Submit"
