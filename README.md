@@ -3,6 +3,7 @@ My simple NodeJS + React app to increase my skills - add/delete some mesages (ta
 ### Requirements:
 <ul>
   <li>NodeJs (v 6 preffereble)</li>
+  <li>Mongo DB (mine is v3.6.3)</li>
   <li>npm</li>
 </ul>
 
