@@ -9,31 +9,42 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      
-    };
+    this.state = {};
+  }
+
+  fetchData() {
+    fetch(urlApi)
+    .then(response => response.json())
+    .then(data => this.setState(data))
+    .catch(err => console.log(err));
+
   }
 
   componentDidMount() {
     this.fetchData();
   }
 
-  fetchData() {
-    fetch(urlApi)
-      .then(response => response.json())
-      .then(data => this.setState(data))
-      .catch(err => console.log(err));
+  getRowsContent() {
+    let obj = this.state,
+        size = Object.keys(obj).length,
+        elem = [],
+        { id, title, text }= obj;
+
+    if(size > 0) {
+      id.forEach((item, i)=>{
+        elem.push(<div class="task-wrapper"> <h5> { title[i] } </h5> <p> {text[i]} </p> </div>);
+      });
+    }
+
+    return elem;
   }
 
   render() {
-    // let { id, title, text }= this.state.data;
-
     return (
       <div>
-        <p>React here!</p>
-        <p> {urlApi} </p>
+        <h2>React here!</h2>
         <div>
-          вфывфывыф
+          { this.getRowsContent() }
         </div>
       </div>
     );
