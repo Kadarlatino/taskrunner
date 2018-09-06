@@ -9,7 +9,7 @@ let mongoose = require('mongoose'),
 homeModel.showHomeData = (callback) => {
   homeData.find({}, (err, home) => {
     if (err) {
-      console.error('sorry, its error :( ');
+      console.error('sorry, its error ;( ');
     } else {
 
       if( home.length > 0 ) {

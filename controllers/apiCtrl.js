@@ -2,7 +2,6 @@ let homeModel = require('../models/homeMdl'),
     apiCtrl = {};
 
 apiCtrl.get = (req, res) => {
-  console.log('hellooooo!');
   homeModel.showHomeData((data) => {
     let {Ids, homeTitle, homeText} = data;
 
@@ -15,6 +14,13 @@ apiCtrl.get = (req, res) => {
     res.end();
   });
 
+};
+
+apiCtrl.post = (req, res) => {
+  let self = this,
+      id = req.body.id;
+
+  homeModel.removeHomeData(id, () => console.log("del!"));
 };
 
 module.exports = apiCtrl;
