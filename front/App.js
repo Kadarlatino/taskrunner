@@ -4,15 +4,9 @@ import ReactDOM from "react-dom";
 let loc = window.location.href;
 let urlApi = loc + 'api';
 
-
 class SomeTitle extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {title: props.title};
-  }
-
   render() {
-    return(<h5>{this.state.title}</h5>);
+    return(<h5>{this.props.title}</h5>);
   }
 }
 
@@ -48,15 +42,11 @@ class App extends Component {
       id: this.id
     });
 
-    let rend = this.rend;
-
     request.open('POST', urlApi, true);
     request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     request.send(json);
-  }
 
-  reRender() {
-    this.render();
+    this.that.fetchData();
   }
 
   componentDidMount() {
@@ -69,16 +59,22 @@ class App extends Component {
         elem = [],
         { id, title, text } = obj;
 
-
-
     if(size > 0) {
       id.forEach((item, i)=>{
-        elem.push(
-          <div className="task-wrapper" id="{ id }">
-            <SomeTitle title={title[i]} />
-            <p> {text[i]}</p>
-            <a href="#" onClick={ this.delData.bind({id: id[i], rend: this.reRender}) } >Delete it!</a>
-          </div>);
+        if(id[i] != 0) {
+          elem.push(
+            <div className="task-wrapper" id="{ id }">
+              <SomeTitle title={title[i]} />
+              <p> {text[i]}</p>
+              <a href="#" onClick={ this.delData.bind({id: id[i], that: this}) } >Delete it!</a>
+            </div>);
+        } else {
+          elem.push(
+            <div className="task-wrapper" id="{ id }">
+              <SomeTitle title={title[i]} />
+              <p> {text[i]}</p>
+            </div>);
+        }
       });
     }
 
