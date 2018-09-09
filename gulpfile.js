@@ -11,7 +11,7 @@ let pump = require('pump');
 let browserSync = require('browser-sync').create();
 
 gulp.task('sass', function (done) {
-  gulp.src('./assets/sass/**/*.scss')
+  gulp.src('./front/assets/sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./public/css'));
     //.pipe(browserSync.stream());
@@ -20,7 +20,7 @@ gulp.task('sass', function (done) {
 });
 //
 // gulp.task('sass:watch', function () {
-//   gulp.watch('./assets/sass/**/*.scss', ['sass']);
+//   gulp.watch('./front/assets/sass/**/*.scss', ['sass']);
 // });
 //
 // gulp.task('bs-proxy', function() {
@@ -34,7 +34,7 @@ gulp.task('js', function(done, cb) {
   //gulp.src('./public/js/**/*.js').pipe(clean());
 
   pump([
-    gulp.src('./assets/js/*.js'),
+    gulp.src('./front/assets/js/*.js'),
     // babel({
     //   "presets": ["env"]
     // }),
