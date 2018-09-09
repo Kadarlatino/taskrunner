@@ -10,3 +10,22 @@
   padding: 10px 20px;
   margin-bottom: 1px;
 }
+
+.sendform {
+  width: 100%;
+
+  input,
+  textarea {
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 350px;
+  }
+
+  textarea {
+    width: 352px;
+    height: 100px;
+    padding: 5px;
+  }
+}
