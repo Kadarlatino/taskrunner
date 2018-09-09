@@ -8,3 +8,15 @@
   background: #e5e5e5;
   padding: 10px 20px;
   margin-bottom: 1px; }
+
+.sendform {
+  width: 100%; }
+  .sendform input,
+  .sendform textarea {
+    margin-bottom: 10px; }
+  .sendform input {
+    width: 350px; }
+  .sendform textarea {
+    width: 352px;
+    height: 100px;
+    padding: 5px; }
