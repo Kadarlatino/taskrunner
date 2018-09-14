@@ -1,30 +1,16 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
+import SomeTitle from "./components/SomeTitle";
+import FormSendTask from "./components/FormSendTask";
 
 let loc = window.location.href;
 let urlApi = loc + 'api';
-
-class SomeTitle extends Component {
-  render() {
-    return(<h5>{this.props.title}</h5>);
-  }
-}
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
-  }
-
-  formSend() {
-    return (
-      <form >
-        <input type="text" name="title"/>
-        <textarea name="text"></textarea>
-        <button type="submit" value="Submit!"/>
-      </form>
-    );
   }
 
   fetchData() {
@@ -87,6 +73,7 @@ class App extends Component {
         <h2>React here!</h2>
         <div>
           { this.getRowsContent() }
+          <FormSendTask />
         </div>
       </div>
     );
