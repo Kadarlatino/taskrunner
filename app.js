@@ -1,6 +1,7 @@
 let express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
+    path = require('path'),
     port = 8888,
     db = require('./server/db'),
     pug = require('pug');
@@ -8,7 +9,7 @@ let express = require('express'),
 app.use(express.static(__dirname +'/public'));
 
 app.set('view engine', 'pug');
-app.set('views', __dirname + '/server/views');
+app.set('views', path.join(__dirname, '/server/views'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
