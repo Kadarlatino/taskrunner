@@ -20,23 +20,47 @@ class App extends Component {
     .catch(err => console.log(err));
   }
 
-  delData(e) {
-    e.preventDefault();
-
+  sendToApi(data, meth) {
     let request = new XMLHttpRequest();
     let json = JSON.stringify({
-      id: this.id
+      id: data.id,
+      title: data.title,
+      text: data.text
     });
 
-    request.open('POST', urlApi, true);
+    console.log(json);
+
+    request.open(meth, urlApi, true);
     request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     request.send(json);
 
-    this.that.fetchData();
+    this.fetchData();
+  }
+
+  delData(e) {
+    e.preventDefault();
+    this.that.sendToApi(this, 'POST');
   }
 
   componentDidMount() {
     this.fetchData();
+  }
+
+  formSendBtn(e) {
+    e.preventDefault();
+    console.log(this.that.state);
+    this.that.sendToApi({
+      title: this.that.state.toSendTitle,
+      text: this.that.state.toSendText
+    }, 'POST');
+  }
+
+  formInputChange(e) {
+    this.that.setState({toSendTitle: e.target.value});
+  }
+
+  formTextareaChange(e) {
+    this.that.setState({toSendText: e.target.value});
   }
 
   getRowsContent() {
@@ -73,7 +97,10 @@ class App extends Component {
         <h2>React here!</h2>
         <div>
           { this.getRowsContent() }
-          <FormSendTask />
+          <FormSendTask
+            formSend={this.formSendBtn.bind({that: this})}
+            formInputChange={this.formInputChange.bind({that: this})}
+            formTextareaChange={this.formTextareaChange.bind({that: this})} />
         </div>
       </div>
     );

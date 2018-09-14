@@ -18,9 +18,15 @@ apiCtrl.get = (req, res) => {
 
 apiCtrl.post = (req, res) => {
   let self = this,
-      id = req.body.id;
+      id = req.body.id,
+      title = req.body.title,
+      text = req.body.text;
 
-  homeModel.removeHomeData(id, () => console.log("del!"));
+  if (id) {
+    homeModel.removeHomeData(id, () => console.log("del!"));
+  } else {
+    homeModel.saveHomeData({title: title, text: text}, () => console.log("post!"));
+  }
 };
 
 module.exports = apiCtrl;

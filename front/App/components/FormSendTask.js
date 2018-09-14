@@ -4,40 +4,19 @@ class FormSendTask extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    
-  }
-
-  handleTitleChange() {
-    //this.setState({title: e.target.value });
-    console.log("Fetched: " + this);
-  }
-
-  handleTextChange() {
-    //this.setState({text: e.target.value });
-    console.log("Fetched: " + this);
-  }
-
-
-  formSend(e) {
-    e.preventDefault();
-
-    // fetch('/users', {
-    //   method: 'POST',
-    //   body: new FormData(form)
-    // });
-    console.log("Fetched: " + this);
   }
 
   render() {
     return(
-      <form method="post" action="/">
-        <input type="text" name="title" placeholder="Put some title here!"/>
-        <br/>
-        <textarea name="text" placeholder="Put some text here here!"></textarea>
-        <br/>
-        <button type="submit" onClick={this.formSend} >Submit!</button>
-      </form>
+      <div className="task-wrapper">
+        <form method="post" action="/" className="sendform">
+          <input type="text" name="title" placeholder="Put some title here!" onChange={this.props.formInputChange} />
+          <br/>
+          <textarea name="text" placeholder="Put some text here here!" onChange={this.props.formTextareaChange}></textarea>
+          <br/>
+          <button type="submit" onClick={this.props.formSend} >Submit!</button>
+        </form>
+      </div>
     );
   }
 }
