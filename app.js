@@ -1,4 +1,7 @@
 let express = require('express'),
+    passport = require('passport'),
+    session = require('express-session'),
+    RedisStore = require('connect-redis')(session),
     app = express(),
     bodyParser = require('body-parser'),
     path = require('path'),
@@ -13,6 +16,13 @@ app.set('views', path.join(__dirname, '/server/views'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}))
 
 let router = require('./server/routes/router')(app);
 

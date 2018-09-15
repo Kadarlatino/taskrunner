@@ -1,5 +1,4 @@
 let homeModel = require('../models/homeMdl'),
-    pug = require('pug'),
     welcomeHome = {};
 
 welcomeHome.get = (req, res) => {

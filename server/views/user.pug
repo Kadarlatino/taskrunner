@@ -1,0 +1,20 @@
+extends layout
+
+block cont
+  div.container
+    h1="Register User!"
+    p="This is register page for user!"
+
+  div.container
+    h2="PUG here!"
+    div.task-wrapper
+      form(method="post" action="/user")#createUser.sendform
+        input(type="text" placeholder="Put your email here!" name="email")
+        br
+        input(type="text" placeholder="Name" name="username")
+        br
+        input(type="text" placeholder="Password" name="password")
+        br
+        input(type="text" placeholder="Password confirm" name="passwordConf")
+        br
+        button(type="submit")="Submit"
