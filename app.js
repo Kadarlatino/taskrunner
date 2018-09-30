@@ -22,7 +22,7 @@ app.use(session({
   secret: 'work hard',
   resave: true,
   saveUninitialized: false
-}))
+}));
 
 let router = require('./server/routes/router')(app);
 

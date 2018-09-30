@@ -1,0 +1,12 @@
+extends layout
+
+block cont
+  div.container
+    h2="PUG login!"
+    div.task-wrapper
+      form(method="post" action="/login")#loginForm.sendform
+        input(type="text" placeholder="Email" name="email")
+        br
+        textarea(placeholder="Password" name="password")
+        br
+        button(type="submit")="Submit"
