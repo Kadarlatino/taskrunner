@@ -17,15 +17,14 @@ apiCtrl.get = (req, res) => {
 };
 
 apiCtrl.post = (req, res) => {
-  let self = this,
-      id = req.body.id,
+  let id = req.body.id,
       title = req.body.title,
       text = req.body.text;
 
   if (id) {
-    homeModel.removeHomeData(id, () => console.log("del!"));
+    homeModel.removeHomeData(id);
   } else {
-    homeModel.saveHomeData({title: title, text: text}, () => console.log("post!"));
+    homeModel.saveHomeData({title: title, text: text});
   }
 };
 

@@ -16,10 +16,6 @@ let mongoose = require('mongoose'),
       password: {
         type: String,
         required: true
-      },
-      passwordConf: {
-        type: String,
-        required: true
       }
     }, {collection: 'users'}),
     userModel = mongoose.model('users', userSchema);
@@ -30,7 +26,7 @@ userModel.saveUserData = (data, callback) => {
 }
 
 //hashing a password before saving it to the database
-UserSchema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
   var user = this;
   bcrypt.hash(user.password, 10, function (err, hash){
     if (err) {
@@ -42,7 +38,8 @@ UserSchema.pre('save', function (next) {
 });
 
 //authenticate input against database
-UserSchema.statics.authenticate = function (email, password, callback) {
+//.statics.authenticate
+userModel.auth = function (email, password, callback) {
   userModel.findOne({ email: email }).exec((err, user) => {
       if (err) {
         return callback(err)
@@ -51,13 +48,16 @@ UserSchema.statics.authenticate = function (email, password, callback) {
         err.status = 401;
         return callback(err);
       }
+
       bcrypt.compare(password, user.password, (err, result) => {
         if (result === true) {
           return callback(null, user);
+          console.log('finded!');
         } else {
-          return callback();
+          console.log('not finded :(');
+          //return callback();
         }
-      })
+      });
     });
 }
 

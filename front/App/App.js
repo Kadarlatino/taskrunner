@@ -9,7 +9,6 @@ let urlApi = loc + 'api';
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
@@ -27,8 +26,6 @@ class App extends Component {
       title: data.title,
       text: data.text
     });
-
-    console.log(json);
 
     request.open(meth, urlApi, true);
     request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
@@ -48,19 +45,22 @@ class App extends Component {
 
   formSendBtn(e) {
     e.preventDefault();
-    console.log(this.that.state);
-    this.that.sendToApi({
-      title: this.that.state.toSendTitle,
-      text: this.that.state.toSendText
+
+    this.sendToApi({
+      title: this.state.toSendTitle,
+      text: this.state.toSendText
     }, 'POST');
+
+    this.setState({toSendTitle: "", toSendText: ""});
+
   }
 
   formInputChange(e) {
-    this.that.setState({toSendTitle: e.target.value});
+    this.setState({toSendTitle: e.target.value});
   }
 
   formTextareaChange(e) {
-    this.that.setState({toSendText: e.target.value});
+    this.setState({toSendText: e.target.value});
   }
 
   getRowsContent() {
@@ -71,16 +71,17 @@ class App extends Component {
 
     if(size > 0) {
       id.forEach((item, i)=>{
+        let idz = "taskWrapper-"+i;
         if(id[i] != 0) {
           elem.push(
-            <div className="task-wrapper" id="{ id }">
+            <div className="task-wrapper" id={idz} key={id[i]}>
               <SomeTitle title={title[i]} />
               <p> {text[i]}</p>
               <a href="#" onClick={ this.delData.bind({id: id[i], that: this}) } >Delete it!</a>
             </div>);
         } else {
           elem.push(
-            <div className="task-wrapper" id="{ id }">
+            <div className="task-wrapper" id={idz} key={id[i]}>
               <SomeTitle title={title[i]} />
               <p> {text[i]}</p>
             </div>);
@@ -98,9 +99,11 @@ class App extends Component {
         <div>
           { this.getRowsContent() }
           <FormSendTask
-            formSend={this.formSendBtn.bind({that: this})}
-            formInputChange={this.formInputChange.bind({that: this})}
-            formTextareaChange={this.formTextareaChange.bind({that: this})} />
+            formInputVal={this.state.toSendTitle}
+            formTextVal ={this.state.toSendText}
+            formSend={this.formSendBtn.bind(this)}
+            formInputChange={this.formInputChange.bind(this)}
+            formTextareaChange={this.formTextareaChange.bind(this)} />
         </div>
       </div>
     );

@@ -10,9 +10,18 @@ class FormSendTask extends Component {
     return(
       <div className="task-wrapper">
         <form method="post" action="/" className="sendform">
-          <input type="text" name="title" placeholder="Put some title here!" onChange={this.props.formInputChange} />
+          <input
+            type="text"
+            name="title"
+            placeholder="Put some title here!"
+            value= {this.props.formInputVal || ""}
+            onChange={this.props.formInputChange} />
           <br/>
-          <textarea name="text" placeholder="Put some text here here!" onChange={this.props.formTextareaChange}></textarea>
+          <textarea
+            name="text"
+            placeholder="Put some text here here!"
+            value= {this.props.formTextVal || ""}
+            onChange={this.props.formTextareaChange}></textarea>
           <br/>
           <button type="submit" onClick={this.props.formSend} >Submit!</button>
         </form>
