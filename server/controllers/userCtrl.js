@@ -2,12 +2,26 @@ let userModel = require('../models/userMdl'),
     userData = {};
 
 userData.get = (req, res) => {
-  if (req.url === "/register") {
-    res.render('user');
+
+  if (req.url == '/register' || req.url == '/login') {
+    if (req.session && req.session.userId) {
+      res.redirect('/profile');
+    } else {
+      if (req.url == '/register') {
+        res.render('register');
+      }
+      if (req.url == '/login') {
+        res.render('login');
+      }
+    }
   }
 
-  if (req.url === "/login") {
-    res.render('login');
+  if (req.url == '/profile') {
+    if (req.session && req.session.userId) {
+      res.render('profile');
+    } else {
+      res.redirect('/login');
+    }
   }
 
   res.end();
@@ -41,11 +55,10 @@ userData.post = function(req, res) {
         err.status = 401;
         return next(err);
       } else {
-        req.session = { userId: user._id };
-        //req.session.userId = user._id;
-        
+        req.session.userId = user._id;
         console.log(req.session);
-        //return res.redirect('/profile');
+
+        return res.redirect('/profile');
       }
     });
   }
